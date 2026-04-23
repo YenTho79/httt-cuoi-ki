@@ -1,0 +1,138 @@
+@startuml
+left to right direction
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam linetype ortho
+skinparam packageStyle rectangle
+skinparam class {
+  BackgroundColor #FFF7FB
+  BorderColor #D86A9A
+  ArrowColor #9C3D6E
+  FontColor #3A2030
+  AttributeFontColor #5A3A4A
+  StereotypeFontColor #9C3D6E
+}
+skinparam package {
+  BackgroundColor #FFF0F6
+  BorderColor #D86A9A
+  FontColor #7A2F57
+}
+hide circle
+hide empty methods
+
+package "Người dùng" {
+  class User {
+    +id: int
+    +name: string
+    +email: string
+    +password: string
+    +phone: string
+    +address: string
+    +role: string
+  }
+
+  class Admin {
+    +manageBooks()
+    +manageOrders()
+    +viewRevenue()
+    +viewInventory()
+  }
+
+  User <|-- Admin
+}
+
+package "Sách" {
+  class Book {
+    +id: int
+    +title: string
+    +isbn: string
+    +price: decimal
+    +stock_quantity: int
+    +description: text
+    +image: string
+  }
+
+  class Category {
+    +id: int
+    +name: string
+  }
+
+  class Author {
+    +id: int
+    +name: string
+    +biography: text
+  }
+
+  class Publisher {
+    +id: int
+    +name: string
+  }
+
+  Category "1" -- "0..*" Book : phân loại
+  Author "1" -- "0..*" Book : viết
+  Publisher "1" -- "0..*" Book : xuất bản
+}
+
+package "Mua hàng" {
+  class Cart {
+    +id: int
+    +user_id: int
+  }
+
+  class CartItem {
+    +id: int
+    +quantity: int
+    +unit_price: decimal
+  }
+
+  class Order {
+    +id: int
+    +total_amount: decimal
+    +status: string
+    +payment_status: string
+    +shipping_address: string
+  }
+
+  class OrderItem {
+    +id: int
+    +quantity: int
+    +unit_price: decimal
+  }
+
+  User "1" -- "1" Cart : sở hữu
+  Cart "1" -- "0..*" CartItem : gồm
+  Book "1" -- "0..*" CartItem : được chọn
+
+  User "1" -- "0..*" Order : đặt
+  Order "1" -- "1..*" OrderItem : gồm
+  Book "1" -- "0..*" OrderItem : được mua
+}
+
+package "Đánh giá & Báo cáo" {
+  class Review {
+    +id: int
+    +rating: int
+    +comment: text
+    +created_at: datetime
+  }
+
+  class InventoryReport {
+    +total_books: int
+    +total_stock: int
+    +low_stock: int
+    +out_of_stock: int
+  }
+
+  class RevenueReport {
+    +month: string
+    +total: decimal
+  }
+
+  User "1" -- "0..*" Review : viết
+  Book "1" -- "0..*" Review : nhận
+
+  Admin ..> InventoryReport : xem
+  Admin ..> RevenueReport : xem
+}
+
+@enduml

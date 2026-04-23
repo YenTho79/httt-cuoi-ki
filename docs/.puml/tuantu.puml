@@ -1,0 +1,71 @@
+@startuml
+skinparam backgroundColor white
+skinparam sequence {
+  ArrowColor #d63384
+  LifeLineBorderColor #d63384
+  LifeLineBackgroundColor #fff0f6
+  ParticipantBorderColor #d63384
+  ParticipantBackgroundColor #ffd6e7
+  ParticipantFontColor #7a1f4d
+  ActorBorderColor #d63384
+  ActorBackgroundColor #ffe3ee
+  ActorFontColor #7a1f4d
+}
+skinparam NoteBackgroundColor #fff7fb
+skinparam NoteBorderColor #f3a6c8
+
+title Sơ đồ tuần tự - Quy trình đặt hàng nhà sách trực tuyến
+
+actor "Khách hàng" as Customer
+participant "Frontend\n(ReactJS)" as FE
+participant "Backend API\n(Laravel)" as BE
+database "CSDL\n(MySQL)" as DB
+
+== Tìm sách ==
+Customer -> FE : Nhập từ khóa / bộ lọc giá
+FE -> BE : GET /api/books?q=&min_price=&max_price=
+BE -> DB : Truy vấn bảng books
+DB --> BE : Danh sách sách phù hợp
+BE --> FE : JSON danh sách sách
+FE --> Customer : Hiển thị kết quả tìm kiếm
+
+== Xem chi tiết sách ==
+Customer -> FE : Chọn 1 cuốn sách
+FE -> BE : GET /api/books/{id}
+BE -> DB : Lấy thông tin sách theo id
+DB --> BE : Dữ liệu chi tiết sách
+BE --> FE : JSON chi tiết sách
+FE --> Customer : Hiển thị trang chi tiết
+
+== Thêm vào giỏ hàng ==
+Customer -> FE : Bấm "Thêm vào giỏ hàng"
+FE -> BE : POST /api/cart/items
+BE -> DB : Kiểm tra / tạo giỏ hàng
+BE -> DB : Thêm sách vào cart_items
+DB --> BE : Lưu thành công
+BE --> FE : Thông báo thêm giỏ hàng thành công
+FE --> Customer : Cập nhật giao diện giỏ hàng
+
+== Thanh toán giả lập ==
+Customer -> FE : Nhập địa chỉ giao hàng
+Customer -> FE : Bấm "Thanh toán giả lập"
+FE -> BE : POST /api/orders
+BE -> DB : Đọc giỏ hàng và cart_items
+DB --> BE : Danh sách sản phẩm trong giỏ
+BE -> BE : Tính tổng tiền đơn hàng
+BE -> DB : Tạo bản ghi orders
+BE -> DB : Tạo các order_items
+BE -> DB : Xóa cart_items sau khi đặt hàng
+DB --> BE : Lưu đơn hàng thành công
+BE --> FE : Trả về message + order_id
+FE --> Customer : Hiển thị "Thanh toán giả lập thành công"
+
+== Xem lịch sử đơn hàng ==
+Customer -> FE : Mở trang đơn hàng
+FE -> BE : GET /api/orders
+BE -> DB : Truy vấn orders theo user_id
+DB --> BE : Danh sách đơn hàng
+BE --> FE : JSON đơn hàng
+FE --> Customer : Hiển thị lịch sử mua hàng
+
+@enduml

@@ -1,0 +1,64 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor #FFE4EF
+  BorderColor #D14D8B
+  ArrowColor #A83B70
+}
+skinparam actor {
+  BorderColor #A83B70
+  BackgroundColor #FFF5F9
+}
+
+actor "Khách hàng" as Customer
+actor "Quản trị viên" as Admin
+
+rectangle "Hệ thống Quản lý Nhà sách trực tuyến" {
+  usecase "Đăng ký" as UC1
+  usecase "Đăng nhập" as UC2
+  usecase "Tìm kiếm sách" as UC3
+  usecase "Lọc sách\ntheo giá / ISBN" as UC4
+  usecase "Xem chi tiết sách" as UC5
+  usecase "Thêm vào giỏ hàng" as UC6
+  usecase "Quản lý giỏ hàng" as UC7
+  usecase "Đặt hàng" as UC8
+  usecase "Thanh toán giả lập" as UC9
+  usecase "Xem lịch sử đơn hàng" as UC10
+  usecase "Đánh giá sản phẩm" as UC11
+
+  usecase "Quản lý sách" as UC12
+  usecase "Quản lý đơn hàng" as UC13
+  usecase "Xem chi tiết đơn hàng" as UC14
+  usecase "Thống kê tồn kho" as UC15
+  usecase "Báo cáo doanh thu" as UC16
+  usecase "Xem dashboard thống kê" as UC17
+}
+
+Customer --> UC1
+Customer --> UC2
+Customer --> UC3
+Customer --> UC4
+Customer --> UC5
+Customer --> UC6
+Customer --> UC7
+Customer --> UC8
+Customer --> UC9
+Customer --> UC10
+Customer --> UC11
+
+Admin --> UC2
+Admin --> UC12
+Admin --> UC13
+Admin --> UC14
+Admin --> UC15
+Admin --> UC16
+Admin --> UC17
+
+UC8 .> UC9 : <<include>>
+UC7 .> UC6 : <<extend>>
+UC5 .> UC11 : <<extend>>
+UC13 .> UC14 : <<include>>
+UC17 .> UC15 : <<include>>
+UC17 .> UC16 : <<include>>
+@enduml
