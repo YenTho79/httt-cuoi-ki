@@ -48,4 +48,5 @@ Route::middleware(['auth:sanctum', 'is_admin'])->prefix('admin')->group(function
 
     Route::get('/inventory/stats', [AdminBookController::class, 'inventoryStats']);
     Route::get('/inventory/list', [AdminBookController::class, 'inventoryList']);
+    Route::put('/inventory/{id}', [AdminBookController::class, 'updateStock']);
 });

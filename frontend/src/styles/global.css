@@ -615,6 +615,78 @@ table {
   flex: 1;
 }
 
+/* ADMIN ENHANCEMENTS */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.status-pending { background: #fee2e2; color: #ef4444; }
+.status-processing { background: #fef3c7; color: #d97706; }
+.status-shipping { background: #dbeafe; color: #2563eb; }
+.status-completed { background: #d1fae5; color: #059669; }
+.status-cancelled { background: #f3f4f6; color: #6b7280; }
+
+.admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.admin-table th {
+  background: #f9fafb;
+  padding: 16px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.admin-table td {
+  padding: 16px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.stock-input {
+  width: 70px;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  text-align: center;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.filter-tab {
+  padding: 8px 16px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  color: #4b5563;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.filter-tab.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
 @media (max-width: 1080px) {
   .hero {
     grid-template-columns: 1fr;

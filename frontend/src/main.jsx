@@ -18,6 +18,7 @@ import OrdersPage from './pages/OrdersPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminOrdersPage from './pages/AdminOrdersPage';
 import AdminInventoryPage from './pages/AdminInventoryPage';
+import AdminBooksPage from './pages/AdminBooksPage';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -58,6 +59,15 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 element={
                   <AdminRoute>
                     <AdminDashboardPage />
+                  </AdminRoute>
+                }
+              />
+
+              <Route
+                path="admin/books"
+                element={
+                  <AdminRoute>
+                    <AdminBooksPage />
                   </AdminRoute>
                 }
               />
