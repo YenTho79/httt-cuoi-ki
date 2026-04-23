@@ -155,7 +155,8 @@ CREATE TABLE `personal_access_tokens` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`) VALUES
 (1, 'Admin BookStore', 'admin@bookstore.com', '$2y$12$YsFBfzSzBra5MDo2jtUpH.DZyhlsFLXlhJuUU5AqI9uG2HgaE8FFq', 'admin'),
 (2, 'Nguyen Van A', 'customer1@bookstore.com', '$2y$12$YsFBfzSzBra5MDo2jtUpH.DZyhlsFLXlhJuUU5AqI9uG2HgaE8FFq', 'customer'),
-(3, 'Tran Thi B', 'customer2@bookstore.com', '$2y$12$YsFBfzSzBra5MDo2jtUpH.DZyhlsFLXlhJuUU5AqI9uG2HgaE8FFq', 'customer');
+(3, 'Tran Thi B', 'customer2@bookstore.com', '$2y$12$YsFBfzSzBra5MDo2jtUpH.DZyhlsFLXlhJuUU5AqI9uG2HgaE8FFq', 'customer'),
+(4, 'Super Admin', 'superadmin@bookstore.com', '$2y$12$YsFBfzSzBra5MDo2jtUpH.DZyhlsFLXlhJuUU5AqI9uG2HgaE8FFq', 'admin');
 
 INSERT INTO `categories` (`id`, `name`, `slug`, `description`) VALUES
 (1, 'Văn học', 'van-hoc', 'Sách văn học Việt Nam và nước ngoài'),
